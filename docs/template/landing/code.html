@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MONOLITH | Transform Video Into Personas</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "surface": "#f9f9f9",
+                        "secondary-fixed": "#e4e2e2",
+                        "inverse-surface": "#2f3131",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "secondary-container": "#e1dfdf",
+                        "on-primary-fixed": "#1b1b1b",
+                        "tertiary-fixed": "#e2e2e2",
+                        "primary-fixed": "#e2e2e2",
+                        "surface-dim": "#dadada",
+                        "surface-bright": "#f9f9f9",
+                        "secondary": "#5e5e5e",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#474747",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "tertiary-container": "#1a1c1c",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#848484",
+                        "secondary-fixed-dim": "#c7c6c6",
+                        "on-tertiary": "#ffffff",
+                        "surface-tint": "#5e5e5e",
+                        "on-surface-variant": "#4c4546",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#c6c6c6",
+                        "inverse-on-surface": "#f0f1f1",
+                        "primary": "#000000",
+                        "outline": "#7e7576",
+                        "on-secondary-container": "#626262",
+                        "on-error": "#ffffff",
+                        "on-background": "#1a1c1c",
+                        "background": "#f9f9f9",
+                        "on-secondary-fixed-variant": "#464747",
+                        "inverse-primary": "#c6c6c6",
+                        "outline-variant": "#cfc4c5",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-surface": "#1a1c1c",
+                        "surface-variant": "#e2e2e2",
+                        "surface-container-high": "#e8e8e8",
+                        "surface-container-highest": "#e2e2e2",
+                        "surface-container-low": "#f3f3f4",
+                        "tertiary": "#000000",
+                        "on-tertiary-container": "#838484",
+                        "surface-container": "#eeeeee",
+                        "primary-container": "#1b1b1b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "grid-pattern": "32px",
+                        "unit": "8px",
+                        "margin-desktop": "48px",
+                        "margin-mobile": "16px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["JetBrains Mono"],
+                        "body-md": ["Inter"],
+                        "stats-lg": ["Inter"],
+                        "display": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "stats-lg": ["40px", {"lineHeight": "1.0", "fontWeight": "700"}],
+                        "display": ["64px", {"lineHeight": "1.0", "letterSpacing": "-0.04em", "fontWeight": "900"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .brutalist-grid {
+            background-size: 32px 32px;
+            background-image: linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
+        }
+        .block-shadow {
+            box-shadow: 4px 4px 0px 0px #000000;
+        }
+        .block-shadow-hover:hover {
+            box-shadow: 6px 6px 0px 0px #000000;
+            transform: translate(-2px, -2px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md brutalist-grid min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-desktop py-4 bg-background/80 backdrop-blur-sm border-b-2 border-primary">
+<div class="font-headline-lg text-headline-lg font-black tracking-tighter text-primary">MONOLITH</div>
+<div class="hidden md:flex gap-8">
+<a class="text-secondary font-medium font-label-caps hover:text-primary transition-colors" href="#">PLATFORM</a>
+<a class="text-secondary font-medium font-label-caps hover:text-primary transition-colors" href="#">PROCESS</a>
+<a class="text-secondary font-medium font-label-caps hover:text-primary transition-colors" href="#">FEATURES</a>
+<a class="text-secondary font-medium font-label-caps hover:text-primary transition-colors" href="#">PRICING</a>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 font-label-caps font-bold hover:bg-white hover:text-primary border-2 border-primary transition-all active:scale-95">
+            START PROJECT
+        </button>
+</nav>
+<main class="flex-grow pt-32">
+<!-- Hero Section -->
+<section class="max-w-container-max mx-auto px-margin-desktop mb-24">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7">
+<h1 class="font-display text-display mb-6 uppercase">
+                        Transform Video Into Actionable Personas.
+                    </h1>
+<p class="font-headline-lg text-headline-lg text-secondary mb-10 max-w-2xl">
+                        Bridge the gap between creative content and strategic targeting with surgical precision.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-primary text-on-primary px-8 py-4 font-label-caps font-bold text-lg border-2 border-primary block-shadow-hover transition-all">
+                            START FREE PROJECT
+                        </button>
+<button class="bg-transparent text-primary px-8 py-4 font-label-caps font-bold text-lg border-2 border-primary hover:bg-surface-variant transition-all">
+                            VIEW SAMPLE INSIGHTS
+                        </button>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="border-4 border-primary p-4 bg-white block-shadow">
+<img alt="Monolith AI Analysis" class="w-full grayscale border-2 border-primary" src="https://lh3.googleusercontent.com/aida/AP1WRLv8hG_fJnILfcyhSS3p9n8twEqHJeeIGqZNk6lAJkPs29R2x-XKaPC-6_n-ImMfN-5iuxTPKPhu7DpNd55g-PcVEXxDZuNsw06GWGZsep_sClUyz5OnZyrx1LewqneSasrjYDDtk1gf6TjGgrtyOkphG3dc28EcPQeryZ74-K9o9iVchPG2A3_7zOXwci7i1d6lObUdoJytU73XI-HMzaYZ3eZyCGo3aPE8LjSNabhcOaDhmo99OQP1bQ"/>
+</div>
+<!-- Decorative element -->
+<div class="absolute -top-4 -right-4 w-24 h-24 border-2 border-primary bg-primary hidden md:block -z-10"></div>
+</div>
+</div>
+</section>
+<!-- The Process Section -->
+<section class="bg-primary text-on-primary py-24">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="mb-16">
+<span class="font-label-caps text-label-caps opacity-70 tracking-widest uppercase">The Process</span>
+<h2 class="font-headline-lg text-headline-lg mt-2 font-black uppercase">Industrial-Grade Extraction</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-0 border-2 border-on-primary">
+<div class="p-10 border-b-2 md:border-b-0 md:border-r-2 border-on-primary hover:bg-on-primary hover:text-primary transition-colors group">
+<span class="font-label-caps text-4xl font-bold mb-6 block text-on-primary group-hover:text-primary">01.</span>
+<h3 class="font-label-caps text-xl font-bold mb-4">INTELLIGENT INTAKE</h3>
+<p class="font-body-md opacity-80 group-hover:opacity-100">Drop any video asset (MP4, MOV). Our proprietary engine scans every frame for semantic patterns and visual cues.</p>
+</div>
+<div class="p-10 border-b-2 md:border-b-0 md:border-r-2 border-on-primary hover:bg-on-primary hover:text-primary transition-colors group">
+<span class="font-label-caps text-4xl font-bold mb-6 block text-on-primary group-hover:text-primary">02.</span>
+<h3 class="font-label-caps text-xl font-bold mb-4">AI-DRIVEN ANALYSIS</h3>
+<p class="font-body-md opacity-80 group-hover:opacity-100">Psychographic and demographic mapping powered by advanced computer vision. We identify who is watching and why.</p>
+</div>
+<div class="p-10 hover:bg-on-primary hover:text-primary transition-colors group">
+<span class="font-label-caps text-4xl font-bold mb-6 block text-on-primary group-hover:text-primary">03.</span>
+<h3 class="font-label-caps text-xl font-bold mb-4">THE PERFECT PERSONA</h3>
+<p class="font-body-md opacity-80 group-hover:opacity-100">Get a high-fidelity profile of your ideal audience member. Strategic insights delivered in raw, actionable data formats.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Features Bento Grid -->
+<section class="py-24 max-w-container-max mx-auto px-margin-desktop">
+<div class="mb-12 flex justify-between items-end">
+<div>
+<span class="font-label-caps text-label-caps text-secondary tracking-widest uppercase">System Capabilities</span>
+<h2 class="font-headline-lg text-headline-lg mt-2 font-black uppercase">Core Protocol Features</h2>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Feature 1 -->
+<div class="md:col-span-8 border-2 border-primary p-8 bg-white flex flex-col justify-between block-shadow group hover:bg-surface-variant transition-colors">
+<div>
+<span class="material-symbols-outlined text-4xl mb-4">analytics</span>
+<h3 class="font-headline-lg text-headline-lg mb-4 uppercase">Audience Fit Engine</h3>
+<p class="font-body-md text-secondary max-w-xl">
+                            Real-time scoring against key market segments. Our engine runs 10,000 simulations per minute to determine precisely where your content hits the mark and where it falls short.
+                        </p>
+</div>
+<div class="mt-8 flex gap-2">
+<span class="px-3 py-1 border border-primary font-label-caps text-[10px]">REAL-TIME</span>
+<span class="px-3 py-1 border border-primary font-label-caps text-[10px]">NEURAL-NET</span>
+</div>
+</div>
+<!-- Feature 2 -->
+<div class="md:col-span-4 border-2 border-primary p-8 bg-primary text-on-primary flex flex-col block-shadow">
+<span class="material-symbols-outlined text-4xl mb-4">trending_up</span>
+<h3 class="font-label-caps text-xl font-bold mb-4">STRATEGIC NEXT MOVES</h3>
+<p class="font-body-md opacity-80">
+                        Actionable recommendations to optimize ad spend. No fluff—just cold, hard data on where to deploy your creative assets for maximum ROAS.
+                    </p>
+</div>
+<!-- Feature 3 -->
+<div class="md:col-span-4 border-2 border-primary p-8 bg-white block-shadow group hover:invert transition-all duration-300">
+<div class="h-40 mb-6 border-b-2 border-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-6xl">file_export</span>
+</div>
+<h3 class="font-label-caps text-xl font-bold mb-4 uppercase">Export-Ready Insights</h3>
+<p class="font-body-md text-secondary">
+                        Professional reports for stakeholders. Clean, technical, and ready for the boardroom.
+                    </p>
+</div>
+<!-- Feature 4 -->
+<div class="md:col-span-8 border-2 border-primary p-8 bg-surface-container-high block-shadow relative overflow-hidden">
+<div class="relative z-10">
+<h3 class="font-headline-lg text-headline-lg mb-2 uppercase">Monolith API</h3>
+<p class="font-body-md text-secondary max-w-md mb-6">Integrate persona generation directly into your internal marketing stack with our low-latency JSON API.</p>
+<code class="bg-primary text-on-primary p-4 font-label-caps text-xs block border-2 border-primary">
+                            POST /v1/analyze { "source": "s3://assets/hero_v2.mp4" }
+                        </code>
+</div>
+<!-- Decorative background icon -->
+<span class="material-symbols-outlined absolute -bottom-10 -right-10 text-[200px] opacity-5 pointer-events-none">code</span>
+</div>
+</div>
+</section>
+<!-- Video Upload Zone (Interactive Aesthetic) -->
+<section class="max-w-container-max mx-auto px-margin-desktop pb-24">
+<div class="border-4 border-dashed border-primary p-16 flex flex-col items-center justify-center text-center bg-white hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="w-20 h-20 bg-primary text-on-primary flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl" data-weight="fill">upload_file</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg uppercase mb-4">Initialize Analysis Engine</h3>
+<p class="font-body-md text-secondary mb-8 max-w-md">Drag and drop raw footage or select a file to begin processing. The system will automatically extract keyframes and generate marketing assets.</p>
+<button class="bg-primary text-on-primary px-12 py-4 font-label-caps font-bold text-xl block-shadow border-2 border-primary">
+                    SELECT FILE
+                </button>
+<div class="mt-8 flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-sm">info</span>
+<span class="font-label-caps text-[10px]">ACCEPTED FORMATS: MP4, MOV, AVI (MAX 2GB)</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 px-margin-desktop mt-auto flex flex-col md:flex-row justify-between items-center gap-4 bg-background border-t-2 border-primary">
+<div class="font-label-caps text-label-caps font-bold text-primary">MONOLITH AI</div>
+<div class="flex gap-8">
+<a class="font-label-caps text-label-caps text-secondary hover:text-primary transition-colors underline" href="#">PRIVACY</a>
+<a class="font-label-caps text-label-caps text-secondary hover:text-primary transition-colors" href="#">TERMS</a>
+<a class="font-label-caps text-label-caps text-secondary hover:text-primary transition-colors" href="#">API</a>
+<a class="font-label-caps text-label-caps text-secondary hover:text-primary transition-colors" href="#">SUPPORT</a>
+</div>
+<div class="font-label-caps text-[10px] text-secondary">© 2024 MONOLITH AI. ALL RIGHTS RESERVED.</div>
+</footer>
+<script>
+        // Micro-interaction for the upload zone
+        const dropZone = document.querySelector('.border-dashed');
+        if (dropZone) {
+            dropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.classList.add('bg-surface-variant');
+            });
+            dropZone.addEventListener('dragleave', () => {
+                dropZone.classList.remove('bg-surface-variant');
+            });
+        }
+
+        // Active Nav State logic simulation
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                document.querySelectorAll('nav a').forEach(l => {
+                    l.classList.remove('text-primary', 'font-bold', 'border-b-2', 'border-primary');
+                    l.classList.add('text-secondary', 'font-medium');
+                });
+                this.classList.remove('text-secondary', 'font-medium');
+                this.classList.add('text-primary', 'font-bold', 'border-b-2', 'border-primary');
+            });
+        });
+    </script>
+</body></html>
